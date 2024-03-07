@@ -9,13 +9,7 @@ function Weather() {
     const [value , setValue] = useState("Egypt");
     const key = '0e445dd22dff49878fc115509232402';
     const apis = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${value}&days=3&aqi=no&alerts=no    `
-    const funcWeather = ()=>{
-        axios.get(apis).then((res) =>{
-            if (res.data) {
-                setWeather(res.data)
-            }
-        }).catch(err => console.error(err))
-    }
+    
     const handelWeather = (e)=>{
         setValue(e.target.value)
     }
@@ -49,8 +43,13 @@ function Weather() {
      )) 
     
     useEffect(()=>{
-        funcWeather();
-    },[value])
+        axios.get(apis).then((res) =>{
+            if (res.data) {
+                setWeather(res.data)
+            }
+        }).catch(err => console.error(err)) 
+       }
+       ,[apis]);
 const filterationWeatherHours = weather?.forecast?.forecastday[0].hour?.map(({time , temp_c} , index)=> (
     <tr key={index}>
           <td>{index>12? `${index-12}:00 PM`  : `${index}:00 AM` } </td>

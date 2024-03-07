@@ -5,7 +5,7 @@ import Weather from './Pages/Weather/Weather';
 function App() {
   return (
     <>
-    <Navbar></Navbar>
+ <Navbar></Navbar>
  <Weather></Weather>
  </>
   );
